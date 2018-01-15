@@ -67,15 +67,12 @@ var fbo = function(exports) {
     exports.particles = new THREE.Points(particleGeometry, renderMaterial);
     exports.renderer = renderer;
   };
-  exports.update = function(){
+  exports.update = function(particleData){
     //update simulation and render into texture
     exports.renderer.render(scene, orthographicCamera, rtt, true);
     //use render target to update particle positions
-    exports.particles.material.uniforms.positions.value = rtt.texture;
-  };
-  exports.updateUniforms = function(n,m){
-    exports.particles.material.uniforms.nval.value = n;
-    exports.particles.material.uniforms.mval.value = m;
+    //particleData.set(rtt.texture);
+    exports.particles.material.uniforms['positions'].value = rtt.texture;
   };
   return exports;
 }({});
